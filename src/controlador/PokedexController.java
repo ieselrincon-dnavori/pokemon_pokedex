@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.stage.*;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
@@ -38,8 +37,6 @@ public class PokedexController {
         numberColumn.setCellValueFactory(cellData -> cellData.getValue().numberProperty().asObject());
         typeColumn.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
 
-
-
         // Fijar el tamaño de las columnas
         nameColumn.setPrefWidth(150);
         nameColumn.setResizable(false);
@@ -57,7 +54,11 @@ public class PokedexController {
 
     private void showPokemonDetails(Pokemon pokemon) {
         if (pokemon != null) {
-            descriptionArea.setText("Nombre: " + pokemon.getName() + "\nTipo: " + pokemon.getType());
+            descriptionArea.setText("Nombre: " + pokemon.getName()
+                    + "\nTipo: " + pokemon.getType()
+                    + "\nHabilidades: " + pokemon.getAbilities()
+                    + "\nAltura: " + (Double.parseDouble(pokemon.getHeight()) / 10) + " m"
+                    + "\nPeso: " + (Double.parseDouble(pokemon.getWeight()) / 10) + " kg");
             pokemonImage.setImage(new Image(pokemon.getImageUrl()));
         } else {
             descriptionArea.setText("");
@@ -67,7 +68,7 @@ public class PokedexController {
 
     private void loadPokemonData() {
         CompletableFuture.runAsync(() -> {
-            for (int i = 1; i <= 151; i++) {
+            for (int i = 1; i <= 951; i++) {
                 try {
                     Pokemon pokemon = PokemonAPI.getPokemon(i);
                     javafx.application.Platform.runLater(() -> pokemonData.add(pokemon));

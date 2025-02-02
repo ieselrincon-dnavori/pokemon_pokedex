@@ -1,7 +1,7 @@
 package api;
 
-
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import modelo.Pokemon;
 
@@ -10,6 +10,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class PokemonAPI {
     private static final String API_URL = "https://pokeapi.co/api/v2/pokemon/";
@@ -30,7 +32,14 @@ public class PokemonAPI {
         String type = jsonObject.getAsJsonArray("types").get(0).getAsJsonObject().get("type").getAsJsonObject().get("name").getAsString();
         String imageUrl = jsonObject.getAsJsonObject("sprites").get("front_default").getAsString();
 
-        return new Pokemon(name, number, type, imageUrl);
+        JsonArray abilitiesArray = jsonObject.getAsJsonArray("abilities");
+        String abilities = StreamSupport.stream(abilitiesArray.spliterator(), false)
+                .map(element -> element.getAsJsonObject().getAsJsonObject("ability").get("name").getAsString())
+                .collect(Collectors.joining(", "));
+
+        String height = jsonObject.get("height").getAsString();
+        String weight = jsonObject.get("weight").getAsString();
+
+        return new Pokemon(name, number, type, imageUrl, abilities, height, weight);
     }
 }
-
