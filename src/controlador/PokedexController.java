@@ -38,6 +38,16 @@ public class PokedexController {
         numberColumn.setCellValueFactory(cellData -> cellData.getValue().numberProperty().asObject());
         typeColumn.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
 
+
+
+        // Fijar el tamaño de las columnas
+        nameColumn.setPrefWidth(150);
+        nameColumn.setResizable(false);
+        numberColumn.setPrefWidth(150);
+        numberColumn.setResizable(false);
+        typeColumn.setPrefWidth(150);
+        typeColumn.setResizable(false);
+
         pokemonTable.setItems(pokemonData);
         pokemonTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPokemonDetails(newValue));
