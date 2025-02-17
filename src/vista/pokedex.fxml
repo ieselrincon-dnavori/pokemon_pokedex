@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -13,7 +14,7 @@
     </top>
 -->
     <center>
-        <TableView fx:id="pokemonTable" prefHeight="433.0" prefWidth="0.0" styleClass="table-view">
+        <TableView fx:id="pokemonTable" prefHeight="390.0" prefWidth="464.0" styleClass="table-view">
             <columns>
                 <TableColumn fx:id="nameColumn" styleClass="table-column" text="Nombre" />
                 <TableColumn fx:id="numberColumn" styleClass="table-column" text="Número" />
@@ -22,9 +23,20 @@
         </TableView>
     </center>
     <right>
-        <VBox fx:id="detailsBox"  maxWidth="250"  prefHeight="433.0" prefWidth="236.0" style="-fx-padding: 10;">
+        <VBox fx:id="detailsBox" maxWidth="250" prefHeight="433.0" prefWidth="236.0" style="-fx-padding: 10;">
             <ImageView fx:id="pokemonImage" fitHeight="200" fitWidth="200" styleClass="image-view" />
-            <TextArea fx:id="descriptionArea" editable="false" styleClass="text-area" wrapText="true" />
+            <TextArea fx:id="descriptionArea" editable="false" prefHeight="227.0" prefWidth="159.0" styleClass="text-area" wrapText="true" />
         </VBox>
     </right>
+   <bottom>
+      <Button mnemonicParsing="false" text="To PDF" BorderPane.alignment="BOTTOM_LEFT">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" top="10.0" />
+         </BorderPane.margin>
+      </Button>
+       <Button fx:id="saveButton" onAction="#savePokemonToPDF" text="Save to PDF" />
+   </bottom>
+
+
+
 </BorderPane>

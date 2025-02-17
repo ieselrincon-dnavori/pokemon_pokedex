@@ -1,6 +1,8 @@
 package controlador;
 
+import javafx.scene.control.SelectionMode;
 import modelo.Pokemon;
+import modelo.PokemonPDFGenerator;
 import api.PokemonAPI;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -10,8 +12,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import java.nio.file.Paths;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class PokedexController {
@@ -40,19 +44,25 @@ public class PokedexController {
         // Fijar el tamaño de las columnas
         nameColumn.setPrefWidth(150);
         nameColumn.setResizable(false);
-
-
         numberColumn.setPrefWidth(150);
         numberColumn.setResizable(false);
-
         typeColumn.setPrefWidth(150);
         typeColumn.setResizable(false);
 
         pokemonTable.setItems(pokemonData);
+        pokemonTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); // Permitir selección múltiple
         pokemonTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPokemonDetails(newValue));
 
         loadPokemonData();
+
+        /* ANTIGUO SELECION SIMPLE
+        pokemonTable.setItems(pokemonData);
+        pokemonTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showPokemonDetails(newValue));
+        loadPokemonData();
+
+         */
     }
 
     private void showPokemonDetails(Pokemon pokemon) {
@@ -82,4 +92,44 @@ public class PokedexController {
             }
         });
     }
+
+    @FXML
+    private void savePokemonToPDF() {
+        ObservableList<Pokemon> selectedPokemons = pokemonTable.getSelectionModel().getSelectedItems();
+        if (!selectedPokemons.isEmpty()) {
+            String filePath = Paths.get(System.getProperty("user.home"), "pokemon_details.pdf").toString();
+            PokemonPDFGenerator.generatePokemonPDF((List<Pokemon>) selectedPokemons, filePath);
+        } else {
+            System.out.println("No hay ningún Pokémon seleccionado.");
+        }
+    }
+
+
+    /*
+    @FXML ANTIGUO FUNCIONAL
+    private void savePokemonToPDF() {
+        Pokemon selectedPokemon = pokemonTable.getSelectionModel().getSelectedItem();
+        if (selectedPokemon != null) {
+            String filePath = Paths.get(System.getProperty("user.home"), "pokemon_details.pdf").toString();
+            PokemonPDFGenerator.generatePokemonPDF(selectedPokemon, filePath);
+        } else {
+            System.out.println("No hay ningún Pokémon seleccionado.");
+        }
+    }
+
+
+
+/*
+    @FXML
+    private void savePokemonToPDF() {
+        Pokemon selectedPokemon = pokemonTable.getSelectionModel().getSelectedItem();
+        if (selectedPokemon != null) {
+            String filePath = Paths.get(System.getProperty("user.home"), "pokemon_details.pdf").toString();
+            PokemonPDFGenerator.generatePokemonPDF(selectedPokemon, filePath);
+        } else {
+            System.out.println("No hay ningún Pokémon seleccionado.");
+        }
+    }
+    */
+
 }
