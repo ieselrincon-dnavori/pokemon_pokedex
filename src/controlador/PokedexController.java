@@ -41,6 +41,7 @@ public class PokedexController {
         nameColumn.setPrefWidth(150);
         nameColumn.setResizable(false);
 
+
         numberColumn.setPrefWidth(150);
         numberColumn.setResizable(false);
 
@@ -56,6 +57,7 @@ public class PokedexController {
 
     private void showPokemonDetails(Pokemon pokemon) {
         if (pokemon != null) {
+            //texto lateral de los bichos.
             descriptionArea.setText("Nombre: " + pokemon.getName()
                     + "\nTipo: " + pokemon.getType()
                     + "\nHabilidades: " + pokemon.getAbilities()
@@ -70,7 +72,7 @@ public class PokedexController {
 
     private void loadPokemonData() {
         CompletableFuture.runAsync(() -> {
-            for (int i = 1; i <= 151; i++) {
+            for (int i = 1; i <= 5; i++) {
                 try {
                     Pokemon pokemon = PokemonAPI.getPokemon(i);
                     javafx.application.Platform.runLater(() -> pokemonData.add(pokemon));

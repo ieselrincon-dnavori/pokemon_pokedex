@@ -4,12 +4,16 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane stylesheets="@../vista/styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="controlador.PokedexController">
-    <top>
+<BorderPane maxHeight="435.0" maxWidth="700.0" prefHeight="435.0" prefWidth="700.0" stylesheets="@../vista/styles.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.PokedexController">
+
+    <!--
+
+       <top>
         <Label prefHeight="59.0" prefWidth="827.0" styleClass="label" text="Pokédex" />
     </top>
+-->
     <center>
-        <TableView fx:id="pokemonTable" styleClass="table-view">
+        <TableView fx:id="pokemonTable" prefHeight="433.0" prefWidth="0.0" styleClass="table-view">
             <columns>
                 <TableColumn fx:id="nameColumn" styleClass="table-column" text="Nombre" />
                 <TableColumn fx:id="numberColumn" styleClass="table-column" text="Número" />
@@ -18,7 +22,7 @@
         </TableView>
     </center>
     <right>
-        <VBox fx:id="detailsBox" prefHeight="433.0" prefWidth="236.0" style="-fx-padding: 10;">
+        <VBox fx:id="detailsBox"  maxWidth="250"  prefHeight="433.0" prefWidth="236.0" style="-fx-padding: 10;">
             <ImageView fx:id="pokemonImage" fitHeight="200" fitWidth="200" styleClass="image-view" />
             <TextArea fx:id="descriptionArea" editable="false" styleClass="text-area" wrapText="true" />
         </VBox>
