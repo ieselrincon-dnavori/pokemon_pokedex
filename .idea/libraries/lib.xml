@@ -2,9 +2,15 @@
   <library name="lib">
     <CLASSES>
       <root url="file://C:/Program Files/Java/javafx-sdk-23.0.2/lib" />
+      <root url="file://C:/Program Files/Java/iText-Core-9s.1.0" />
+      <root url="jar://C:/Program Files/Java/slf4j-api-1.7.30.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://C:/Program Files/Java/iText-Core-9s.1.0" />
+    </SOURCES>
+    <jarDirectory url="file://C:/Program Files/Java/iText-Core-9s.1.0" recursive="false" />
     <jarDirectory url="file://C:/Program Files/Java/javafx-sdk-23.0.2/lib" recursive="false" />
+    <jarDirectory url="file://C:/Program Files/Java/iText-Core-9s.1.0" recursive="false" type="SOURCES" />
   </library>
 </component>
