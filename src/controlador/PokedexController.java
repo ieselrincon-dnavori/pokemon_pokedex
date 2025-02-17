@@ -40,8 +40,10 @@ public class PokedexController {
         // Fijar el tamaño de las columnas
         nameColumn.setPrefWidth(150);
         nameColumn.setResizable(false);
+
         numberColumn.setPrefWidth(150);
         numberColumn.setResizable(false);
+
         typeColumn.setPrefWidth(150);
         typeColumn.setResizable(false);
 
@@ -68,7 +70,7 @@ public class PokedexController {
 
     private void loadPokemonData() {
         CompletableFuture.runAsync(() -> {
-            for (int i = 1; i <= 951; i++) {
+            for (int i = 1; i <= 151; i++) {
                 try {
                     Pokemon pokemon = PokemonAPI.getPokemon(i);
                     javafx.application.Platform.runLater(() -> pokemonData.add(pokemon));
